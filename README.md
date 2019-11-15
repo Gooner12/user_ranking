@@ -35,7 +35,7 @@ If running the above command shows a version of python, then the interpreter is 
 
 3. If python is installed properly, go to your working directory where python is installed using the following command. Here, we move to the folder named user_ranking inside the edx folder.
 ```shell
-$> cd edx\user_ranking
+$> cd edx/user_ranking
 ```
 4. Run the python script located in your directory using the following command.
 ```shell
