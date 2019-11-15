@@ -23,14 +23,11 @@ def check_function():
 
     pattern = re.compile(r'^(https?://)?(w{3}\.)?(stackoverflow\.com/users)(/[0-9]+)(/[a-z0-9-]+)')
     if (pattern.search(url)):
-        r = requests.get(url)
-        soup = BeautifulSoup(r.text, 'html.parser')
-        page_status = soup.find_all('h1', attrs={'class':'fs-headline1 mb4'})
-        if(len(page_status) != 0):
-            print("Page does not exist! Check and enter the URL again.")
-            ask()
-        else:
-            process_function(soup, url)
+        if ('https://' not in url):
+            url = 'https://' + url
+            url_parser(url)
+        elif('https://' in url):
+            url_parser(url)
     else:
         print ("Please enter the correct URL.")
         ask()
@@ -89,10 +86,7 @@ def process_function(soup, user_url):
     print('Number of silver badges: ',number_of_silver)
     print('Number of bronze badges: ', number_of_bronze)
 
-
-url = input('Enter the url of a stackoverflow user: ')
-pattern = re.compile(r'^(https?://)?(w{3}\.)?(stackoverflow\.com/users)(/[0-9]+)(/[a-z0-9-]+)')
-if (pattern.search(url)):
+def url_parser(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
     page_status = soup.find_all('h1', attrs={'class':'fs-headline1 mb4'})
@@ -101,6 +95,16 @@ if (pattern.search(url)):
         ask()
     else:
         process_function(soup, url)
+
+
+url = input('Enter the url of a stackoverflow user: ')
+pattern = re.compile(r'^(https?://)?(w{3}\.)?(stackoverflow\.com/users)(/[0-9]+)(/[a-z0-9-]+)')
+if (pattern.search(url)):
+    if ('https://' not in url):
+        url = 'https://' + url
+        url_parser(url)
+    elif('https://' in url):
+        url_parser(url)
 else:
     print ("Please enter the correct URL.")
     ask()
