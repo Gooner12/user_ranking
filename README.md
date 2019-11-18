@@ -21,6 +21,18 @@ This program takes the URL of stackoverflow users and generate their statistics 
 
 ## Quick Start
 
+##### Getting list of Melbourne based users from Stackoverflow
+
+To get the list of desired users, Melbourne based users in this case, go to [Stack Exchange Data Explorer](https://data.stackexchange.com/) and click on the [Stack Overflow](https://data.stackexchange.com/stackoverflow/queries) which is at the top of the list. On that page click "Compose Query" and write the below SQL code in the textbox.
+````mysql
+SELECT Id As [User Link], WebsiteURL, Reputation, [Location]
+FROM users
+WHERE Location LIKE '%Melbourne%'
+ORDER BY Reputation DESC
+````
+After that click on "Run Query" to get the result ,and download the CSV file using the "Download CSV" located at the top right of the result table.
+**Note:** You might get different records as statistics of users are updated regularly.
+
 Before running the python script, make sure to add the python interpreter to the path.
 
 **Note:** To add python to the path, add the location of the python interpreter in your computer to the environment variable. For stepwise process, see the article on https://geek-university.com/python/add-python-to-the-windows-path/.
